@@ -121,7 +121,7 @@ button.darkMode {
     position: absolute;
     top: 20px;
     right: 20px;
-    padding: 5px;
+    padding: 0px;
     background-color: #333;
     color: #333;
     border: none;
@@ -131,14 +131,14 @@ button.lightMode {
     position: absolute;
     top: 20px;
     right: 20px;
-    padding: 5px;
+    padding: 0px;
     background-color: #FFFFFF;
     color: #333;
     border: none;
 }
 
 button:hover {
-    background-color: coral;
+    background-color: #333;
     cursor: pointer;
 }
 
@@ -149,7 +149,7 @@ button.darkMode {
 
 button.darkMode:hover {
     background-color: #333;
-    color: rgb(235, 235, 235)
+    color: #333
 }
 
 button.lightMode {
@@ -162,4 +162,14 @@ button.lightMode:hover {
     color: rgb(235, 235, 235)
 }
 
+button#sun {
+    visibility: visible;
+    opacity: 1;
+}
+
+button#moon {
+    visibilty: 0;
+    opacity: 1;
+
+}
 
