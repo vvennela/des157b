@@ -1,0 +1,49 @@
+#video {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    min-width: 100%;
+    max-height: 100%;
+    background-size: contain;
+    background-color: #333;
+}
+
+#poem p {
+    position: absolute;
+    padding: 1em;
+    color: white;
+    font-size: 2em;
+    background-color: #333;
+    transition: all 2.5s;
+    font-family: puffin, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+}
+
+#line1 {
+    bottom: 80%;
+    left: 0%;
+}
+
+#line2 {
+    bottom: 10%;
+    left: 0%;
+}
+
+#line3 {
+    bottom: 10%;
+    left: 70%;
+}
+
+#line4 {
+    bottom: 30%;
+    left: 25%;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.showing {
+    opacity: 1;
+}
