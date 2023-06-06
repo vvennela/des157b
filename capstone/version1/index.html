@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Web Page</title>
+    <style>
+        .center-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .instructions {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .center-image img {
+            cursor: pointer;
+            margin-top: -100px;
+        }
+
+        .score {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 0px;
+        }
+
+        .hints-section {
+            position: relative;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .hints-section h2 {
+            margin: 0;
+        }
+
+        .hint {
+            position: fixed;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: left;
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome to UC Davis Seal Scavenger Hunt</h1>
+    </div>
+
+    <div class="instructions">
+        <p>Instructions: Click on any part of the seal and answer the question about the given UC Davis Landmark. Once you answer 10 questions, you will have unlocked the Davis seal!</p>
+    </div>
+
+    <div class="score">
+        Score: <span id="score">0</span>
+    </div>
+
+    <div class="center-image">
+        <img src="images/seal-PhotoRoom.png-PhotoRoom.png" width="700" height="555" alt="My Image" usemap="#myImageMap" onclick="askQuestion()">
+        
+    </div>
+
+    <map name="myImageMap">
+        <area shape="rect" coords="0,0,350,277" alt="Area 1" onclick="askQuestion()">
+        <area shape="rect" coords="350,0,700,277" alt="Area 2" onclick="askQuestion()">
+        <area shape="rect" coords="0,277,350,555" alt="Area 3" onclick="askQuestion()">
+        <area shape="rect" coords="350,277,700,555" alt="Area 4" onclick="askQuestion()">
+    </map>
+    
+
+    <div class="hints-section">
+        <div class="hint" id="hint"></div>
+    </div>
+
+    <script>
+        var score = 0;
+        var currentQuestionIndex = 0;
+        var questions = [
+            {
+                question: "What is the official school color of UC Davis?",
+                answer: "Blue",
+                hint: "Now walk to the Robert Mondavi Institute."
+            },
+            {
+                question: "Which building on the UC Davis campus is known for its distinctive egg-shaped design?",
+                answer: "Robert Mondavi Institute for Wine and Food Science",
+                hint: "Next, explore the Quad and find the iconic Memorial Union."
+            },
+            {
+                question: "Which museum at UC Davis features an extensive collection of art and hosts various exhibitions throughout the year?",
+                answer: "Manetti Shrem Museum",
+                hint: "Continue to the Arboretum and discover the beautiful Peter J. Shields Oak Grove."
+            },
+            {
+                question: "Which library on the UC Davis campus is known for its distinctive round shape?",
+                answer: "Peter J. Shields Library",
+                hint: "Visit the UC Davis Dairy and learn about dairy science and farming practices."
+            },
+            {
+                question: "Which UC Davis facility is a world-renowned veterinary teaching hospital?",
+                answer: "William R. Pritchard Veterinary Medical Teaching Hospital",
+                hint: "Head to the Mondavi Center for the Performing Arts and enjoy a live performance."
+            }
+            // Add more questions as needed
+        ];
+
+        function askQuestion() {
+            var question = questions[currentQuestionIndex].question;
+            var userAnswer = prompt(question);
+
+            if (userAnswer !== null) {
+                var answer = questions[currentQuestionIndex].answer;
+
+                if (userAnswer.trim().toLowerCase() === answer.trim().toLowerCase()) {
+                    score++;
+                    document.getElementById("score").textContent = score;
+
+                    if (currentQuestionIndex < questions.length - 1) {
+                        var hint = questions[currentQuestionIndex].hint;
+                        document.getElementById("hint").textContent = hint;
+                        currentQuestionIndex++;
+                    } else {
+                        alert("Congratulations! You have answered all the questions.");
+                        // You can add additional logic here, like displaying a message or unlocking the Davis seal
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
