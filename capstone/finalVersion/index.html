@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DES157B Capstone Project</title>
+    <style>
+        .center-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        body {
+            background-color: #022851;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #FFBF00;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .instructions {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            font-size: large;
+        }
+
+        .center-image img {
+            cursor: pointer;
+            margin-top: -100px;
+        }
+
+        .score {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 0px;
+            color: white;
+        }
+
+        .hints-section {
+            position: relative;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .hints-section h2 {
+            margin: 0;
+        }
+
+        .hint {
+            position: fixed;
+           color: white;
+            transform: translateY(-50%);
+            margin-top: 20px;
+            font-style: bold;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        /* Styles for the modal dialog */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 20% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content input[type="text"] {
+            margin-top: 10px;
+            padding: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .modal-content button {
+            margin-top: 10px;
+            padding: 10px 20px;
+        }
+
+        #myImage {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .expanded-image {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome to UC Davis Seal Scavenger Hunt</h1>
+    </div>
+
+    <div class="instructions">
+        <p>Instructions: Click on any part of the seal and answer the question about the given UC Davis Landmark. Once you answer all 5 questions, you will have unlocked the Davis seal!</p>
+        <p>You must go to the Centennial Seal Location in order to answer the first question.</p>
+    </div>
+
+    <div class="hints-section">
+        <div class="hint" id="hint"></div>
+    </div>
+
+    <div class="score">
+        Score: <span id="score">0</span>
+    </div>
+
+    <div class="center-image">
+        <img src="images/circle.png" width="687" height="685" alt="myImage" onclick="showQuestionDialog()">
+    </div>
+
+    <div id="questionModal" class="modal">
+        <div class="modal-content">
+            <h2>Question</h2>
+            <p id="questionText"></p>
+            <input type="text" id="answerInput" placeholder="Enter your answer">
+            <button id="submitAnswerButton">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+  "use strict";
+
+  var score = 0;
+  var currentQuestionIndex = 0;
+  var questions = [
+    {
+      question: "What cafe is right next to the Seal?",
+      answer: "Mishka's Cafe",
+      hint: "Now walk to the Farmers Market area @ Central Park"
+    },
+    {
+      question: "What day of the weekend does the Farmer's Market take place?",
+      answer: "Saturday",
+      hint: "Next, explore the Quad and find the iconic Memorial Union."
+    },
+    {
+      question: "Which main game do people play in the MU Games Area?",
+      answer: "bowling",
+      hint: "Visit 254 Old Davis Rd and explore the area"
+    },
+    {
+      question: "Which museum at UC Davis features an extensive collection of art and hosts various exhibitions throughout the year?",
+      answer: "Manetti Shrem Museum",
+      hint: "Head to campus and go to the Silo. Explore the area."
+    },
+    {
+      question: "What is the most popular food truck near the Silo?",
+      answer: "Shah's Halal Food",
+      hint: "Head to the Mondavi Center for the Performing Arts and enjoy a live performance."
+    }
+  ];
+
+  function showQuestionDialog() {
+    var questionTextElement = document.getElementById("questionText");
+    var answerInput = document.getElementById("answerInput");
+    var modal = document.getElementById("questionModal");
+    var submitButton = document.getElementById("submitAnswerButton");
+
+    questionTextElement.textContent = questions[currentQuestionIndex].question;
+    answerInput.value = "";
+
+    modal.style.display = "block";
+
+    // Handle the submit button click event
+    submitButton.addEventListener("click", function () {
+      var userAnswer = answerInput.value.trim().toLowerCase();
+      var answer = questions[currentQuestionIndex].answer.toLowerCase();
+
+      if (userAnswer === answer) {
+        score++;
+        expand(); 
+        document.getElementById("score").textContent = score;
+
+        if (currentQuestionIndex < questions.length - 1) {
+          var hint = questions[currentQuestionIndex].hint;
+          document.getElementById("hint").textContent = hint;
+          currentQuestionIndex++;
+        } else {
+          closeModal();
+          // Show a completion message instead of an alert
+          showCompletionMessage();
+          return;
+        }
+      }
+
+      closeModal();
+    });
+
+    // Close the modal dialog
+    function closeModal() {
+      modal.style.display = "none";
+      submitButton.removeEventListener("click", closeModal);
+    }
+  }
+  var clickCount = score; 
+
+  function expand() {
+    clickCount++ 
+    if (clickCount === 1) {
+        var image = document.getElementById("myImage");
+        image.classList.toggle("expanded-image");
+        clickCount = 0;
+    }
+  }
+
+  function showCompletionMessage() {
+    var modal = document.createElement("div");
+    modal.className = "modal";
+    modal.style.display = "block";
+
+    var modalContent = document.createElement("div");
+    modalContent.className = "modal-content";
+
+    var completionMessage = document.createElement("p");
+    completionMessage.textContent = "Congratulations! You have answered all the questions.";
+
+    var closeButton = document.createElement("button");
+    closeButton.textContent = "Close";
+    closeButton.addEventListener("click", function () {
+      modal.style.display = "none";
+      document.body.removeChild(modal);
+    });
+
+    modalContent.appendChild(completionMessage);
+    modalContent.appendChild(closeButton);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+  }
+
+  window.addEventListener("load", function () {
+    var scoreElement = document.getElementById("score");
+    var hintElement = document.getElementById("hint");
+
+    var imageElement = document.querySelector(".center-image img");
+    imageElement.addEventListener("click", showQuestionDialog);
+
+    scoreElement.textContent = score;
+    hintElement.textContent = "";
+  });
+})();
+    </script>
+</body>
+</html>
