@@ -1,0 +1,147 @@
+.center-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+body {
+    background-color: #022851;
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+    background-color: #FFBF00;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.instructions {
+    text-align: center;
+    padding: 20px;
+    color: white;
+    font-size: large;
+}
+
+.center-image img {
+    cursor: pointer;
+    margin-top: -100px;
+}
+
+.score {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 0px;
+    color: white;
+}
+
+.hints-section {
+    position: relative;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.hints-section h2 {
+    margin: 0;
+}
+
+.hint {
+    position: fixed;
+   color: white;
+    transform: translateY(-50%);
+    margin-top: 20px;
+    font-style: bold;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+/* Styles for the modal dialog */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 20% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content input[type="text"] {
+    margin-top: 10px;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal-content button {
+    margin-top: 10px;
+    padding: 10px 20px;
+}
+
+#myImage {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    transition: all 0.3s ease;
+}
+
+.expanded-image {
+    width: 200px;
+    height: 200px;
+}
+
+
+  #locationModal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  #locationModal .modal-content {
+    background-color: #fefefe;
+    margin: 20% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  #locationModal .modal-content h2 {
+    margin-top: 0;
+  }
+  
+  #locationModal .modal-content p {
+    margin-top: 10px;
+    color: #333;
+  }
+  
+  #locationModal .modal-content button {
+    margin-top: 10px;
+    padding: 10px 20px;
+  }
